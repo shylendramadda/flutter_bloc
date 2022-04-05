@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/counter_cubit.dart';
+import 'business_logic/cubits/counter/counter_cubit.dart';
 import 'utils/url_controller.dart';
 
 void main() {
