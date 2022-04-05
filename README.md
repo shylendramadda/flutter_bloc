@@ -1,7 +1,7 @@
 # flutter_block
-Flutter practice with BLoC design pattern
+Flutter practice with latest BLoC design pattern
 
-**Few useful commands:
+> Few useful commands:
 
 * Flutter version: flutter --version
 * To validate and determine if there are any platform dependencies: flutter doctor -v
