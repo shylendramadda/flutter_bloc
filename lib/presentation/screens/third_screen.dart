@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../business_logic/cubits/counter/counter_cubit.dart';
+import '../../logic/cubits/counter_cubit.dart';
 import '../../utils/url_controller.dart';
 
 class ThirdScreen extends StatefulWidget {
@@ -65,6 +65,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FloatingActionButton(
+                    heroTag: "3",
                     backgroundColor: widget.color,
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).decrement();
@@ -73,6 +74,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                     tooltip: 'Decrement',
                     child: const Icon(Icons.remove)),
                 FloatingActionButton(
+                    heroTag: "4",
                     backgroundColor: widget.color,
                     onPressed: () {
                       // BlocProvider.of<CounterCubit>(context).increment();
