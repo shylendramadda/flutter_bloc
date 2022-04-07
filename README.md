@@ -1,4 +1,4 @@
-# flutter_block
+# flutter_bloc
 Flutter practice with latest BLoC design pattern
 
 > Few useful commands:
