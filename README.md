@@ -4,7 +4,7 @@ Flutter practice with latest BLoC design pattern
 > Few useful commands:
 
 * Flutter version: flutter --version
-* To validate and determine if there are any platform dependencies: flutter doctor -v
+* To install and update flutter tools: flutter doctor -v
 * To list the connected devices: flutter devices
 * To upgrade the flutter: flutter upgrade
 * To check the channels: flutter channel
