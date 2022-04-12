@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // }
               final count = context.select(
                   (CounterCubit cubit) => cubit.state.counterValue == 5);
-              return Text('$count hey it is 5');
+              return Text('Is it number 5? $count');
             }),
             const SizedBox(
               height: 24,
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     tooltip: 'Decrement',
                     child: const Icon(Icons.remove)),
                 FloatingActionButton(
-                    heroTag: "decrement",
+                    heroTag: "Increment",
                     onPressed: () {
                       // BlocProvider.of<CounterCubit>(context).increment();
                       context.read<CounterCubit>().increment();

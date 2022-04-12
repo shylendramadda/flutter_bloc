@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_block/logic/cubits/settings_cubit.dart';
+import 'package:flutter_block/logic/utility/app_bloc_oberver.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -16,12 +17,12 @@ void main() async {
       storageDirectory: await getApplicationDocumentsDirectory());
 
   HydratedBlocOverrides.runZoned(
-    () => runApp(MyApp(
-      appRouter: AppRouter(),
-      connectivity: Connectivity(),
-    )),
-    storage: storage,
-  );
+      () => runApp(MyApp(
+            appRouter: AppRouter(),
+            connectivity: Connectivity(),
+          )),
+      storage: storage,
+      blocObserver: AppBlocObserver());
 }
 
 class MyApp extends StatelessWidget {
