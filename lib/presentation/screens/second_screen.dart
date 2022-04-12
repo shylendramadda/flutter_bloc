@@ -5,7 +5,7 @@ import '../../logic/cubits/counter_cubit.dart';
 import '../../utils/url_controller.dart';
 
 class SecondScreen extends StatefulWidget {
-  SecondScreen({Key? key, required this.title, required this.color})
+  const SecondScreen({Key? key, required this.title, required this.color})
       : super(key: key);
 
   final String title;

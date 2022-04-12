@@ -5,7 +5,7 @@ import '../../logic/cubits/counter_cubit.dart';
 import '../../utils/url_controller.dart';
 
 class ThirdScreen extends StatefulWidget {
-  ThirdScreen({Key? key, required this.title, required this.color})
+  const ThirdScreen({Key? key, required this.title, required this.color})
       : super(key: key);
 
   final String title;
