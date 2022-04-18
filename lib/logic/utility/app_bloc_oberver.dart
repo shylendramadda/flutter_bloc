@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -37,7 +40,9 @@ class AppBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
   }
 
-  void print(dynamic value) {
-    print(value);
+  void print(Object value) {
+    if (kDebugMode) {
+      log(value.toString());
+    }
   }
 }

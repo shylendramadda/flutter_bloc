@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/enums.dart';
-import '../../logic/cubits/counter_cubit.dart';
-import '../../logic/cubits/internet_cubit.dart';
+import '../../logic/cubits/battery_cubit/battery_cubit.dart';
+import '../../logic/cubits/counter_cubit/counter_cubit.dart';
+import '../../logic/cubits/internet_cubit/internet_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title, required this.color})
@@ -150,7 +151,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).pushNamed('/third');
               },
               child: const Text("Got to Third screen"),
-            )
+            ),
+            const SizedBox(height: 24),
+            MaterialButton(
+              color: Colors.brown,
+              onPressed: () => context.read<BatteryCubit>().getBatteryLevel(),
+              child: const Text("Get Battery Level",
+                  style: TextStyle(color: Colors.white)),
+            ),
+            const SizedBox(height: 24),
+            BlocBuilder<BatteryCubit, BatteryState>(builder: ((context, state) {
+              return Text("Battery Level is: ${state.batteryLevel}");
+            })),
           ],
         ),
       ),

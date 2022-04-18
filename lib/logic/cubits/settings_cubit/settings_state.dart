@@ -1,5 +1,6 @@
 part of 'settings_cubit.dart';
 
+// ignore: must_be_immutable
 class SettingsState extends Equatable {
   bool appNotifications;
   bool emailNotifications;

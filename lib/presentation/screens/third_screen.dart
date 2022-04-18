@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubits/counter_cubit.dart';
+import '../../logic/cubits/counter_cubit/counter_cubit.dart';
 import '../../utils/url_controller.dart';
 
 class ThirdScreen extends StatefulWidget {

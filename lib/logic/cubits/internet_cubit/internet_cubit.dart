@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../constants/enums.dart';
+import '../../../constants/enums.dart';
 
 part 'internet_state.dart';
 
