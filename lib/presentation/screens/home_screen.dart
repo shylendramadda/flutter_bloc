@@ -32,138 +32,168 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: const Icon(Icons.settings))
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            BlocBuilder<InternetCubit, InternetState>(
-                builder: ((context, state) {
-              if (state is InternetConnected &&
-                  state.connectionType == ConnectionType.wifi) {
-                return const Text(
-                  "Wifi",
-                  style: TextStyle(fontSize: 22),
-                );
-              } else if (state is InternetConnected &&
-                  state.connectionType == ConnectionType.mobile) {
-                return const Text(
-                  "Mobile",
-                  style: TextStyle(fontSize: 22),
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            })),
-            const Text('The Counter value is:'),
-            const SizedBox(height: 14),
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: ((context, state) => showSnackbar(context,
-                  state.wasIncremented ? "Incremented!" : "Decremented!")),
-              builder: (context, state) {
-                if (state.counterValue < 0) {
-                  return Text(
-                    "Negative " + state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(
+                height: 24,
+              ),
+              BlocBuilder<InternetCubit, InternetState>(
+                  builder: ((context, state) {
+                if (state is InternetConnected &&
+                    state.connectionType == ConnectionType.wifi) {
+                  return const Text(
+                    "Wifi",
+                    style: TextStyle(fontSize: 22),
                   );
-                } else if (state.counterValue == 0) {
-                  return Text(
-                    state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                } else if (state.counterValue % 2 == 0) {
-                  return Text(
-                    "Even " + state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
+                } else if (state is InternetConnected &&
+                    state.connectionType == ConnectionType.mobile) {
+                  return const Text(
+                    "Mobile",
+                    style: TextStyle(fontSize: 22),
                   );
                 } else {
-                  return Text(
-                    state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
-                  );
+                  return const CircularProgressIndicator();
                 }
-              },
-            ),
-            const SizedBox(height: 24),
-            Builder(builder: (context) {
-              // final counterState = context.watch<CounterCubit>().state;
-              // final internetState = context.watch<InternetCubit>().state;
-              // if (internetState is InternetConnected &&
-              //     internetState.connectionType == ConnectionType.wifi) {
-              //   return Text(
-              //     'Counter:' +
-              //         counterState.counterValue.toString() +
-              //         ' Internet: Wifi',
-              //     style: const TextStyle(fontSize: 22),
-              //   );
-              // } else if (internetState is InternetConnected &&
-              //     internetState.connectionType == ConnectionType.mobile) {
-              //   return Text(
-              //     'Counter:' +
-              //         counterState.counterValue.toString() +
-              //         ' Internet: Mobile',
-              //     style: const TextStyle(fontSize: 22),
-              //   );
-              // } else {
-              //   return const Text('NO CONNECTION');
-              // }
-              final count = context.select(
-                  (CounterCubit cubit) => cubit.state.counterValue == 5);
-              return Text('Is it number 5? $count');
-            }),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FloatingActionButton(
-                    heroTag: "decrement",
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                      // context.read<CounterCubit>().decrement();
-                    },
-                    tooltip: 'Decrement',
-                    child: const Icon(Icons.remove)),
-                FloatingActionButton(
-                    heroTag: "Increment",
-                    onPressed: () {
-                      // BlocProvider.of<CounterCubit>(context).increment();
-                      context.read<CounterCubit>().increment();
-                    },
-                    tooltip: 'Increment',
-                    child: const Icon(Icons.add))
-              ],
-            ),
-            const SizedBox(height: 24),
-            MaterialButton(
-              color: Colors.amberAccent,
-              onPressed: () {
-                Navigator.of(context).pushNamed('/second');
-              },
-              child: const Text(
-                "Got to Second screen",
+              })),
+              const Text('The Counter value is:'),
+              const SizedBox(height: 14),
+              BlocConsumer<CounterCubit, CounterState>(
+                listener: ((context, state) => showSnackbar(context,
+                    state.wasIncremented ? "Incremented!" : "Decremented!")),
+                builder: (context, state) {
+                  if (state.counterValue < 0) {
+                    return Text(
+                      "Negative " + state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else if (state.counterValue == 0) {
+                    return Text(
+                      state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else if (state.counterValue % 2 == 0) {
+                    return Text(
+                      "Even " + state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else {
+                    return Text(
+                      state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  }
+                },
               ),
-            ),
-            const SizedBox(height: 24),
-            MaterialButton(
-              color: Colors.orangeAccent,
-              onPressed: () {
-                Navigator.of(context).pushNamed('/third');
-              },
-              child: const Text("Got to Third screen"),
-            ),
-            const SizedBox(height: 24),
-            MaterialButton(
-              color: Colors.brown,
-              onPressed: () => context.read<BatteryCubit>().getBatteryLevel(),
-              child: const Text("Get Battery Level",
-                  style: TextStyle(color: Colors.white)),
-            ),
-            const SizedBox(height: 24),
-            BlocBuilder<BatteryCubit, BatteryState>(builder: ((context, state) {
-              return Text("Battery Level is: ${state.batteryLevel}");
-            })),
-          ],
+              const SizedBox(height: 24),
+              Builder(builder: (context) {
+                final counterState = context.watch<CounterCubit>().state;
+                final internetState = context.watch<InternetCubit>().state;
+                if (internetState is InternetConnected &&
+                    internetState.connectionType == ConnectionType.wifi) {
+                  return Text(
+                    'Counter:' +
+                        counterState.counterValue.toString() +
+                        ' Internet: Wifi',
+                    style: const TextStyle(fontSize: 22),
+                  );
+                } else if (internetState is InternetConnected &&
+                    internetState.connectionType == ConnectionType.mobile) {
+                  return Text(
+                    'Counter:' +
+                        counterState.counterValue.toString() +
+                        ' Internet: Mobile',
+                    style: const TextStyle(fontSize: 22),
+                  );
+                } else {
+                  return const Text('NO CONNECTION');
+                }
+              }),
+              const SizedBox(height: 24),
+              Builder(builder: (context) {
+                // final counterState = context.watch<CounterCubit>().state;
+                // final internetState = context.watch<InternetCubit>().state;
+                // if (internetState is InternetConnected &&
+                //     internetState.connectionType == ConnectionType.wifi) {
+                //   return Text(
+                //     'Counter:' +
+                //         counterState.counterValue.toString() +
+                //         ' Internet: Wifi',
+                //     style: const TextStyle(fontSize: 22),
+                //   );
+                // } else if (internetState is InternetConnected &&
+                //     internetState.connectionType == ConnectionType.mobile) {
+                //   return Text(
+                //     'Counter:' +
+                //         counterState.counterValue.toString() +
+                //         ' Internet: Mobile',
+                //     style: const TextStyle(fontSize: 22),
+                //   );
+                // } else {
+                //   return const Text('NO CONNECTION');
+                // }
+                final count = context.select(
+                    (CounterCubit cubit) => cubit.state.counterValue == 5);
+                return Text('Is it number 5? $count');
+              }),
+              const SizedBox(
+                height: 24,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FloatingActionButton(
+                      heroTag: "decrement",
+                      onPressed: () {
+                        BlocProvider.of<CounterCubit>(context).decrement();
+                        // context.read<CounterCubit>().decrement();
+                      },
+                      tooltip: 'Decrement',
+                      child: const Icon(Icons.remove)),
+                  FloatingActionButton(
+                      heroTag: "Increment",
+                      onPressed: () {
+                        // BlocProvider.of<CounterCubit>(context).increment();
+                        context.read<CounterCubit>().increment();
+                      },
+                      tooltip: 'Increment',
+                      child: const Icon(Icons.add))
+                ],
+              ),
+              const SizedBox(height: 24),
+              MaterialButton(
+                color: Colors.amberAccent,
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/second');
+                },
+                child: const Text(
+                  "Got to Second screen",
+                ),
+              ),
+              const SizedBox(height: 24),
+              MaterialButton(
+                color: Colors.orangeAccent,
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/third');
+                },
+                child: const Text("Got to Third screen"),
+              ),
+              const SizedBox(height: 24),
+              MaterialButton(
+                color: Colors.brown,
+                onPressed: () => context.read<BatteryCubit>().getBatteryLevel(),
+                child: const Text("Get Battery Level",
+                    style: TextStyle(color: Colors.white)),
+              ),
+              const SizedBox(height: 24),
+              BlocBuilder<BatteryCubit, BatteryState>(
+                  builder: ((context, state) {
+                return Text("Battery Level is: ${state.batteryLevel}");
+              })),
+            ],
+          ),
         ),
       ),
     );
